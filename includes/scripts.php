@@ -2,7 +2,7 @@
 /**
  * Load Theme JavaScript and CSS
  *
- * @package     WP Bacon Bar
+ * @package     Genesis Bacon Bar
  * @subpackage  Genesis
  * @copyright   Copyright (c) 2013, FAT Media, LLC
  * @license     GPL-2.0+

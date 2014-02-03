@@ -2,7 +2,7 @@
 /**
  * Install functions.
  *
- * @package      WP Bacon Bar
+ * @package      Genesis Bacon Bar
  * @author       Robert Neu <http://wpbacon.com/>
  * @copyright    Copyright (c) 2014, FAT Media, LLC
  * @license      GPL2+
