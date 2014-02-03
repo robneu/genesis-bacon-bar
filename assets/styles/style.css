@@ -1,0 +1,64 @@
+/*
+	Plugin Styles for the Genesis Bacon Bar
+*/
+
+
+body {
+	padding-top: 80px !important;
+	margin-top: 0 !important;
+}
+
+.bacon-bar  {
+	background: #312D2E;
+	font-size: 14px;
+	font-weight: normal !important;
+	height: 80px;
+	line-height: 1;
+	padding: 0;
+	text-align: center !important;
+	z-index: 99998;
+	box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3) inset, 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.bacon-bar .wrap {
+	height: 60px;
+	margin: 0 auto;
+	max-width: 1140px;
+	padding-top: 20px;
+}
+
+.fixed-bar {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+}
+
+.admin-bar .fixed-bar {
+	top: 32px;
+}
+
+.bacon-bar .bacon-text {
+    color: #F2F2F2;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
+}
+
+.bacon-bar .bacon-button {
+    background: none repeat scroll 0 0 #D55454;
+    border-radius: 2px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    margin-left: 40px;
+    margin-top: 0;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none !important;
+}
