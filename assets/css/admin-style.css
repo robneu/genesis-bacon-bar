@@ -1,0 +1,36 @@
+.one-half {
+	float: left;
+	margin-left: 2.564102564102564%;
+	width: 48.717948717948715%;
+}
+
+.first {
+	clear: both;
+	margin-left: 0;
+}
+
+.color-pircker-row {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px 0 5px;
+}
+
+.postbox .inside .color-pircker-row:last-child,
+.postbox .inside .color-pircker-row *:last-child {
+    margin: 0 !important;
+}
+
+.color-pircker-row.odd {
+    border-bottom: 1px solid #EDEDED;
+    border-top: 1px solid #EDEDED;
+}
+
+.color-pircker-row > label {
+}
+
+.wp-picker-container,
+.wp-picker-container:active {
+    display: block;
+    float: right;
+}
