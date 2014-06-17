@@ -26,8 +26,8 @@ function baconbar_array_has_data( $array ) {
 
 // This function can live wherever is suitable in your plugin
 function baconbar_get_template_part( $slug, $name = null, $load = true ) {
-    global $baconbar_template_loader;
-    $baconbar_template_loader->get_template_part( $slug, $name, $load );
+    $template_loader = new Bacon_Bar_Template_Loader;
+    $template_loader->get_template_part( $slug, $name, $load );
 }
 
 function baconbar_get_data() {
@@ -37,10 +37,8 @@ function baconbar_get_data() {
 		'button_text'  => genesis_get_option( 'baconbar_button_text', $field ),
 		'target_blank' => genesis_get_option( 'baconbar_target_blank', $field ),
 		'teaser_text'  => genesis_get_option( 'baconbar_teaser_text', $field ),
-		'above_site'   => genesis_get_option( 'baconbar_above_site', $field ),
-		'sticky_top'   => genesis_get_option( 'baconbar_sticky_top', $field ),
-		'below_site'   => genesis_get_option( 'baconbar_below_site', $field ),
-		'sticky_foot'  => genesis_get_option( 'baconbar_sticky_foot', $field ),
+		'position'     => genesis_get_option( 'baconbar_position', $field ),
+		'is_sticky'    => genesis_get_option( 'baconbar_sticky', $field ),
 	);
 	return $settings;
 }
@@ -60,10 +58,10 @@ function baconbar_setup() {
 	}
 	$settings = baconbar_get_data();
 	add_filter( 'body_class', 'baconbar_body_class' );
-	if ( $settings['above_site'] ) {
+	if ( 'above' === $settings['position'] ) {
 		add_action( 'genesis_before', 'baconbar_do_header_bar' );
 	}
-	if ( $settings['below_site'] ) {
+	if ( 'below' === $settings['position'] ) {
 		add_action( 'genesis_after', 'baconbar_do_footer_bar' );
 	}
 }
@@ -73,10 +71,10 @@ function baconbar_setup() {
 function baconbar_body_class( $classes ) {
 	$settings = baconbar_get_data();
 	$classes[] = 'bacon-bar-active';
-	if ( $settings['sticky_top'] && $settings['above_site'] ) {
+	if ( $settings['is_sticky'] && 'above' === $settings['position'] ) {
 		$classes[] = 'sticky-top';
 	}
-	if ( $settings['sticky_foot'] && $settings['below_site'] ) {
+	if ( $settings['is_sticky'] && 'below' === $settings['position'] ) {
 		$classes[] = 'sticky-bottom';
 	}
 	return $classes;
@@ -85,14 +83,14 @@ function baconbar_body_class( $classes ) {
 function baconbar_get_bar_class( $position ) {
 	$settings = baconbar_get_data();
 	$classes  = 'header-bar';
-	if ( $settings['sticky_top'] ) {
+	if ( $settings['is_sticky'] ) {
 		$classes .= ' fixed-bar';
 	}
 	if ( 'footer' !== $position ) {
 		return $classes;
 	}
 	$classes  = 'footer-bar';
-	if ( $settings['sticky_foot'] ) {
+	if ( $settings['is_sticky'] ) {
 		$classes .= ' fixed-footer';
 	}
 	return $classes;

@@ -16,13 +16,11 @@ defined( 'WPINC' ) or die;
 ------------------------------------------------------------ */
 
 /**
- * baconbar_default_options function.
- *
- * This function stores the default Bacon Bar options. It can be filtered using baconbar_default_options.
+ * This function stores the default Bacon Bar options.
+ * It can be filtered using baconbar_default_options.
  *
  * @return $options, filtered by baconbar_default_options
- *
- * @since 1.0.0
+ * @since  1.0.0
  *
  */
 function baconbar_default_options() {
@@ -36,10 +34,8 @@ function baconbar_default_options() {
 		'baconbar_button_color'       => '',
 		'baconbar_button_hover_color' => '',
 		'baconbar_button_text_color'  => '',
-		'baconbar_above_site'         => '1',
-		'baconbar_sticky_top'         => '',
-		'baconbar_below_site'         => '',
-		'baconbar_sticky_foot'        => '',
+		'baconbar_position'           => 'above',
+		'baconbar_sticky'             => '',
 	);
 	return apply_filters( 'baconbar_default_options', $options );
 }
@@ -246,28 +242,20 @@ function baconbar_content_metabox() {
  */
 function baconbar_position_metabox() {
 	$field = BACON_SETTINGS_FIELD;
-	$above_site  = '[baconbar_above_site]';
-	$sticky_top  = '[baconbar_sticky_top]';
-	$below_site  = '[baconbar_below_site]';
-	$sticky_foot = '[baconbar_sticky_foot]';
+	$position   = '[baconbar_position]';
+	$sticky_top = '[baconbar_sticky]';
 	?>
 
-	<h4><?php _e( 'Select options to change how your bacon bar works.', 'baconbar' ); ?></h4>
+	<h4><?php _e( 'Select options to change how your bacon bar will display.', 'baconbar' ); ?></h4>
 	<p>
-		<input type="checkbox" name="<?php echo $field . $above_site; ?>" id="<?php echo $field . $above_site; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_above_site', $field ) ); ?> />
-		<label for="<?php echo $field . $above_site; ?>"><?php _e( 'Add the bacon bar above your site? (Header Bar)', 'baconbar' ); ?></label>
-	</p>
+		<label for="<?php echo $field . $position; ?>"><?php _e( 'Where would you like to display the bacon bar on your site?', 'baconbar' ); ?></label>
+		<select class="widefat" name="<?php echo $field . $position; ?>" id="<?php echo $field . $position; ?>">
+			<option value="above" <?php selected( genesis_get_option( 'baconbar_position', $field ), 'above' ) ?>><?php _e( 'Above my site (Header Bar)', 'baconbar' ); ?></option>
+			<option value="below" <?php selected( genesis_get_option( 'baconbar_position', $field ), 'below' ) ?>><?php _e( 'Below my site (Footer Bar)', 'baconbar' ); ?></option>
+		</select>
 	<p>
-		<input type="checkbox" name="<?php echo $field . $sticky_top; ?>" id="<?php echo $field . $sticky_top; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_sticky_top', $field ) ); ?> />
-		<label for="<?php echo $field . $sticky_top; ?>"><?php _e( 'Make the top bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
-	</p>
-	<p>
-		<input type="checkbox" name="<?php echo $field . $below_site; ?>" id="<?php echo $field . $below_site; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_below_site', $field ) ); ?> />
-		<label for="<?php echo $field . $below_site; ?>"><?php _e( 'Add the bacon bar below your site? (Footer bar)', 'baconbar' ); ?></label>
-	</p>
-	<p>
-		<input type="checkbox" name="<?php echo $field . $sticky_foot; ?>" id="<?php echo $field . $sticky_foot; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_sticky_foot', $field ) ); ?> />
-		<label for="<?php echo $field . $sticky_foot; ?>"><?php _e( 'Make the bottom bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
+		<input type="checkbox" name="<?php echo $field . $sticky_top; ?>" id="<?php echo $field . $sticky_top; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_sticky', $field ) ); ?> />
+		<label for="<?php echo $field . $sticky_top; ?>"><?php _e( 'Make the bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
 	</p>
 	<?php
 }
