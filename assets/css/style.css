@@ -3,8 +3,13 @@
 */
 
 
-body {
+body.bacon-bar-active.sticky-top {
 	padding-top: 80px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-active.sticky-foot {
+	padding-bottom: 80px !important;
 	margin-top: 0 !important;
 }
 
@@ -27,7 +32,7 @@ body {
 	padding-top: 20px;
 }
 
-.fixed-bar {
+.bacon-bar.fixed-bar {
 	bottom: 0;
 	left: 0;
 	position: fixed;
@@ -37,28 +42,40 @@ body {
 	z-index: 99999;
 }
 
+.bacon-bar.fixed-footer {
+	bottom: 0;
+	left: 0;
+	margin-bottom: 0;
+	position: fixed;
+	right: 0;
+}
+
 .admin-bar .fixed-bar {
 	top: 32px;
 }
 
 .bacon-bar .bacon-text {
-    color: #F2F2F2;
-    display: inline-block;
-    font-size: 20px;
-    margin: 0;
+	color: #F2F2F2;
+	display: inline-block;
+	font-size: 20px;
+	margin: 0;
 }
 
 .bacon-bar .bacon-button {
-    background: none repeat scroll 0 0 #D55454;
-    border-radius: 2px;
-    color: #FFFFFF;
-    display: inline-block;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1;
-    margin-left: 40px;
-    margin-top: 0;
-    padding: 10px 30px;
-    text-align: center;
-    text-decoration: none !important;
+	background: #D55454;
+	border-radius: 2px;
+	color: #ffffff;
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1;
+	margin-left: 40px;
+	margin-top: 0;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none !important;
+}
+
+.bacon-bar .bacon-button:hover {
+    background: #DE5858;
 }
