@@ -30,15 +30,20 @@ function baconbar_get_template_part( $slug, $name = null, $load = true ) {
     $template_loader->get_template_part( $slug, $name, $load );
 }
 
+function baconbar_get_option( $option ) {
+	$setting = BACON_SETTINGS_FIELD;
+	$output = genesis_get_option( $option, $setting );
+	return $output;
+}
+
 function baconbar_get_data() {
-	$field = BACON_SETTINGS_FIELD;
 	$settings = array(
-		'button_url'   => genesis_get_option( 'baconbar_button_url', $field ),
-		'button_text'  => genesis_get_option( 'baconbar_button_text', $field ),
-		'target_blank' => genesis_get_option( 'baconbar_target_blank', $field ),
-		'teaser_text'  => genesis_get_option( 'baconbar_teaser_text', $field ),
-		'position'     => genesis_get_option( 'baconbar_position', $field ),
-		'is_sticky'    => genesis_get_option( 'baconbar_sticky', $field ),
+		'button_url'   => baconbar_get_option( 'baconbar_button_url' ),
+		'button_text'  => baconbar_get_option( 'baconbar_button_text' ),
+		'target_blank' => baconbar_get_option( 'baconbar_target_blank' ),
+		'teaser_text'  => baconbar_get_option( 'baconbar_teaser_text' ),
+		'position'     => baconbar_get_option( 'baconbar_position' ),
+		'is_sticky'    => baconbar_get_option( 'baconbar_sticky' ),
 	);
 	return $settings;
 }

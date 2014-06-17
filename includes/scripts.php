@@ -38,13 +38,12 @@ function wpbacon_enqueue_scripts() {
 }
 
 function baconbar_get_style_data() {
-	$field = BACON_SETTINGS_FIELD;
 	$styles = array(
-		'bg_color'           => genesis_get_option( 'baconbar_bg_color', $field ),
-		'text_color'         => genesis_get_option( 'baconbar_text_color', $field ),
-		'button_color'       => genesis_get_option( 'baconbar_button_color', $field ),
-		'button_hover_color' => genesis_get_option( 'baconbar_button_hover_color', $field ),
-		'button_text_color'  => genesis_get_option( 'baconbar_button_text_color', $field ),
+		'bg_color'           => baconbar_get_option( 'baconbar_bg_color' ),
+		'text_color'         => baconbar_get_option( 'baconbar_text_color' ),
+		'button_color'       => baconbar_get_option( 'baconbar_button_color' ),
+		'button_hover_color' => baconbar_get_option( 'baconbar_button_hover_color' ),
+		'button_text_color'  => baconbar_get_option( 'baconbar_button_text_color' ),
 	);
 	return $styles;
 }
