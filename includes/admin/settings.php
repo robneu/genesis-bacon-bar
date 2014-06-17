@@ -27,13 +27,19 @@ defined( 'WPINC' ) or die;
  */
 function baconbar_default_options() {
 	$options = array(
-		'baconbar_button_url'   => '',
-		'baconbar_button_text'  => '',
-		'baconbar_target_blank' => '',
-		'baconbar_teaser_text'  => '',
-		'baconbar_above_site'   => '1',
-		'baconbar_below_site'   => '',
-		'baconbar_sticky_bar'   => '',
+		'baconbar_button_url'         => '',
+		'baconbar_button_text'        => '',
+		'baconbar_target_blank'       => '',
+		'baconbar_teaser_text'        => '',
+		'baconbar_bg_color'           => '',
+		'baconbar_text_color'         => '',
+		'baconbar_button_color'       => '',
+		'baconbar_button_hover_color' => '',
+		'baconbar_button_text_color'  => '',
+		'baconbar_above_site'         => '1',
+		'baconbar_sticky_top'         => '',
+		'baconbar_below_site'         => '',
+		'baconbar_sticky_foot'        => '',
 	);
 	return apply_filters( 'baconbar_default_options', $options );
 }
@@ -127,6 +133,7 @@ function baconbar_theme_options() {
 	global $_baconbar_settings_hook;
 	$_baconbar_settings_hook = add_submenu_page( 'genesis', 'Bacon Bar Settings', 'Bacon Bar Settings', 'edit_theme_options', BACON_SETTINGS_FIELD, 'baconbar_options_page' );
 
+	add_action( 'load-'.$_baconbar_settings_hook, 'baconbar_settings_styles' );
 	add_action( 'load-'.$_baconbar_settings_hook, 'baconbar_settings_scripts' );
 	add_action( 'load-'.$_baconbar_settings_hook, 'baconbar_settings_boxes' );
 }
@@ -136,7 +143,7 @@ function baconbar_theme_options() {
 ------------------------------------------------------------ */
 
 /**
- * baconbar_settings_scripts function.
+ * baconbar_settings_styles function.
  *
  * This function enqueues the scripts needed for the Bacon Bar Settings settings page.
  *
@@ -145,11 +152,27 @@ function baconbar_theme_options() {
  * @since 1.0.0
  *
  */
+function baconbar_settings_styles() {
+	global $_baconbar_settings_hook;
+	$css_uri = BACON_BAR_URL . 'assets/css/';
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_style( 'baconbar-admin', $css_uri .'admin-style.css', array(), '1.0.0' );
+}
+
+/**
+ * This function enqueues the scripts needed for the Bacon Bar Settings settings page.
+ *
+ * @global $_baconbar_settings_hook
+ * @since 1.0.0
+ *
+ */
 function baconbar_settings_scripts() {
 	global $_baconbar_settings_hook;
+	$js_uri = BACON_BAR_URL . 'assets/js/';
 	wp_enqueue_script( 'common' );
 	wp_enqueue_script( 'wp-lists' );
 	wp_enqueue_script( 'postbox' );
+    wp_enqueue_script( 'baconbar-admin', $js_uri .'admin.js', array( 'wp-color-picker' ), '1.0.0', true );
 }
 
 
@@ -169,10 +192,9 @@ function baconbar_settings_scripts() {
 function baconbar_settings_boxes() {
 	global $_baconbar_settings_hook;
 	add_meta_box( 'baconbar-content-box', __( 'Bacon Bar Content', 'baconbar' ), 'baconbar_content_metabox', $_baconbar_settings_hook, 'main' );
-	add_meta_box( 'baconbar-styles-box',  __( 'Bacon Bar Styles', 'baconbar' ),  'baconbar_styles_metabox',  $_baconbar_settings_hook, 'main' );
-	add_meta_box( 'baconbar-general-box', __( 'Bacon Bar Options', 'baconbar' ), 'baconbar_general_metabox', $_baconbar_settings_hook, 'main' );
+	add_meta_box( 'baconbar-position-box', __( 'Bacon Bar Position', 'baconbar' ), 'baconbar_position_metabox', $_baconbar_settings_hook, 'main' );
+	add_meta_box( 'baconbar-colors-box',  __( 'Bacon Bar Colors', 'baconbar' ),  'baconbar_colors_metabox',  $_baconbar_settings_hook, 'main' );
 }
-
 
 /* Add our custom post metabox for social sharing
 ------------------------------------------------------------ */
@@ -186,130 +208,109 @@ function baconbar_settings_boxes() {
  *
  */
 function baconbar_content_metabox() {
-
 	$field        = BACON_SETTINGS_FIELD;
 	$button_url   = '[baconbar_button_url]';
 	$target_blank = '[baconbar_target_blank]';
 	$button_text  = '[baconbar_button_text]';
 	$teaser_text  = '[baconbar_teaser_text]';
-
 	?>
 
-	<p><?php _e( 'Add the content which will appear in your bacon bar.', 'baconbar' ); ?></p>
-	<p>
-		<label for="<?php echo $field . $button_text; ?>"><?php _e( 'Enter your button text:', 'baconbar' ); ?></label><br />
-		<input type="text" name="<?php echo $field . $button_text; ?>" id="<?php echo  $field . $button_text; ?>" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_text', $field ) ) ?>" size="50" />
-	</p>
-	<p>
-		<label for="<?php echo $field . $button_url; ?>"><?php _e( 'Enter your button URL:', 'baconbar' ); ?></label><br />
-		<input type="text" name="<?php echo $field . $button_url; ?>" id="<?php echo  $field . $button_url; ?>" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_url', $field ) ) ?>" size="50" />
-
-		<label for="<?php echo $field . $target_blank; ?>">
-			<input type="checkbox" name="<?php echo $field . $target_blank; ?>" id="<?php echo $field . $target_blank; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_target_blank', $field ) ); ?> />
-		<?php _e( 'Open in a new Window?', 'baconbar' ); ?></label>
-	</p>
+	<h4><?php _e( 'Add the content which will appear in your bacon bar.', 'baconbar' ); ?></h4>
 	<p>
 		<label for="<?php echo $field . $teaser_text; ?>"><?php _e( 'Enter text you would like to display in your bacon bar:', 'baconbar' ); ?></label>
+		<input type="text" class="widefat" name="<?php echo $field . $teaser_text; ?>" id="<?php echo $field . $teaser_text; ?>" value="<?php echo esc_textarea(  genesis_get_option( 'baconbar_teaser_text', $field ) ); ?>" />
 	</p>
-
-	<textarea name="<?php echo $field . $teaser_text; ?>" id="<?php echo $field . $teaser_text; ?>" cols="78" rows="2"><?php echo esc_textarea(  genesis_get_option( 'baconbar_teaser_text', $field ) ); ?></textarea>
-
+	<p class="one-half first">
+		<label for="<?php echo $field . $button_text; ?>"><?php _e( 'Enter your button text:', 'baconbar' ); ?></label><br />
+		<input type="text" class="widefat" name="<?php echo $field . $button_text; ?>" id="<?php echo  $field . $button_text; ?>" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_text', $field ) ) ?>" />
+	</p>
+	<p class="one-half">
+		<label for="<?php echo $field . $button_url; ?>"><?php _e( 'Enter your button link URL:', 'baconbar' ); ?></label><br />
+		<input type="text" class="widefat" name="<?php echo $field . $button_url; ?>" id="<?php echo  $field . $button_url; ?>" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_url', $field ) ) ?>" />
+	</p>
+	<p>
+		<label for="<?php echo $field . $target_blank; ?>">
+			<input type="checkbox" name="<?php echo $field . $target_blank; ?>" id="<?php echo $field . $target_blank; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_target_blank', $field ) ); ?> />
+		<?php _e( 'Open Button Link in a new Window?', 'baconbar' ); ?></label>
+	</p>
 	<?php
-
 }
 
 /**
- * Bacon Bar style options.
+ * Bacon Bar position options.
  *
- * Callback function for the Bacon Bar Settings style metabox.
+ * Callback function for the Bacon Bar Settings position metabox.
  *
  * @since 1.0.0
  *
  */
-function baconbar_styles_metabox() {
-
-	$field        = BACON_SETTINGS_FIELD;
-	$button_url   = '[baconbar_button_url]';
-	$target_blank = '[baconbar_target_blank]';
-	$button_text  = '[baconbar_button_text]';
-	$teaser_text  = '[baconbar_teaser_text]';
-
-	?>
-
-	<p><?php _e( 'Adjust the colors and styles for your baocn bar.', 'baconbar' ); ?></p>
-	<p>
-		<input type="checkbox" name="<?php echo $field . $facebook_link; ?>" id="<?php echo $field . $facebook_link; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_facebook_link', $field ) ); ?> />
-		<label for="<?php echo $field . $facebook_link; ?>"><?php _e( 'Include a Facebook Like button on your posts?', 'baconbar' ); ?></label>
-	</p>
-	<p>
-		<input type="checkbox" name="<?php echo $field; ?>[baconbar_twitter_link]" id="<?php echo $field; ?>[baconbar_twitter_link]" value="1" <?php checked( 1, genesis_get_option( 'baconbar_twitter_link', $field ) ); ?> />
-		<label for="<?php echo $field; ?>[baconbar_twitter_link]"><?php _e( 'Include a Twitter Tweet button on your posts?', 'baconbar' ); ?></label>
-	</p>
-	<p>
-		<input type="checkbox" name="<?php echo $field; ?>[baconbar_google_link]" id="<?php echo $field; ?>[baconbar_google_link]" value="1" <?php checked( 1, genesis_get_option( 'baconbar_google_link', $field ) ); ?> />
-		<label for="<?php echo $field; ?>[baconbar_google_link]"><?php _e( 'Include a Google Plus button on your posts?', 'baconbar' ); ?></label>
-	</p>
-	<?php
-
-}
-
-/**
- * Bacon Bar general options.
- *
- * Callback function for the Bacon Bar Settings general metabox.
- *
- * @since 1.0.0
- *
- */
-function baconbar_general_metabox() {
-
+function baconbar_position_metabox() {
 	$field = BACON_SETTINGS_FIELD;
-	$above_site = '[baconbar_above_site]';
-	$below_site = '[baconbar_below_site]';
-	$sticky_bar = '[baconbar_sticky_bar]';
-
+	$above_site  = '[baconbar_above_site]';
+	$sticky_top  = '[baconbar_sticky_top]';
+	$below_site  = '[baconbar_below_site]';
+	$sticky_foot = '[baconbar_sticky_foot]';
 	?>
 
-	<p><?php _e( 'Select options to change how your bacon bar works.', 'baconbar' ); ?></p>
+	<h4><?php _e( 'Select options to change how your bacon bar works.', 'baconbar' ); ?></h4>
 	<p>
 		<input type="checkbox" name="<?php echo $field . $above_site; ?>" id="<?php echo $field . $above_site; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_above_site', $field ) ); ?> />
-		<label for="<?php echo $field . $above_site; ?>"><?php _e( 'Include the bacon bar above your site? (Header Bar)', 'baconbar' ); ?></label>
+		<label for="<?php echo $field . $above_site; ?>"><?php _e( 'Add the bacon bar above your site? (Header Bar)', 'baconbar' ); ?></label>
 	</p>
 	<p>
-		<input type="checkbox" name="<?php echo $field; ?>[baconbar_google_link]" id="<?php echo $field; ?>[baconbar_google_link]" value="1" <?php checked( 1, genesis_get_option( 'baconbar_google_link', $field ) ); ?> />
-		<label for="<?php echo $field; ?>[baconbar_google_link]"><?php _e( 'Include the bacon bar below your site? (Footer bar)', 'baconbar' ); ?></label>
+		<input type="checkbox" name="<?php echo $field . $sticky_top; ?>" id="<?php echo $field . $sticky_top; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_sticky_top', $field ) ); ?> />
+		<label for="<?php echo $field . $sticky_top; ?>"><?php _e( 'Make the top bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
 	</p>
 	<p>
-		<input type="checkbox" name="<?php echo $field . $facebook_link; ?>" id="<?php echo $field . $facebook_link; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_facebook_link', $field ) ); ?> />
-		<label for="<?php echo $field . $facebook_link; ?>"><?php _e( 'Make the bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
+		<input type="checkbox" name="<?php echo $field . $below_site; ?>" id="<?php echo $field . $below_site; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_below_site', $field ) ); ?> />
+		<label for="<?php echo $field . $below_site; ?>"><?php _e( 'Add the bacon bar below your site? (Footer bar)', 'baconbar' ); ?></label>
+	</p>
+	<p>
+		<input type="checkbox" name="<?php echo $field . $sticky_foot; ?>" id="<?php echo $field . $sticky_foot; ?>" value="1" <?php checked( 1, genesis_get_option( 'baconbar_sticky_foot', $field ) ); ?> />
+		<label for="<?php echo $field . $sticky_foot; ?>"><?php _e( 'Make the bottom bacon bar sticky? (Fixed position)', 'baconbar' ); ?></label>
 	</p>
 	<?php
-
 }
 
-
-/* Set the screen layout to one column
------------------------------------------------------------- */
-
-add_filter( 'screen_layout_columns', 'baconbar_settings_layout_columns', 10, 2 );
 /**
- * baconbar_settings_layout_columns function.
+ * Bacon Bar color options.
  *
- * This function sets the column layout to one for the Bacon Bar Settings settings page.
- *
- * @param mixed $columns
- * @param mixed $screen
- * @return $columns
+ * Callback function for the Bacon Bar Settings color metabox.
  *
  * @since 1.0.0
  *
  */
-function baconbar_settings_layout_columns( $columns, $screen ) {
-	global $_baconbar_settings_hook;
-	if ( $screen == $_baconbar_settings_hook ) {
-		$columns[$_baconbar_settings_hook] = 1;
-	}
-	return $columns;
+function baconbar_colors_metabox() {
+	$field          = BACON_SETTINGS_FIELD;
+	$bg_color       = '[baconbar_bg_color]';
+	$text_color     = '[baconbar_text_color]';
+	$button_color   = '[baconbar_button_color]';
+	$hover_color    = '[baconbar_button_hover_color]';
+	$btn_text_color = '[baconbar_button_text_color]';
+	?>
+
+	<h4><?php _e( 'Adjust the colors and styles for your bacon bar.', 'baconbar' ); ?></h4>
+	<p class="color-pircker-row">
+		<span><?php _e( 'Choose the background color for your bacon bar:', 'baconbar' ); ?></span>
+		<input type="text" class="color-picker" name="<?php echo $field . $bg_color; ?>" id="<?php echo  $field . $bg_color; ?>" data-default-color="#312D2E" value="<?php echo genesis_get_option( 'baconbar_bg_color', $field ) ?>" />
+	</p>
+	<p class="color-pircker-row odd">
+		<span><?php _e( 'Choose the text color for your bacon bar:', 'baconbar' ); ?></span>
+		<input type="text" class="color-picker" name="<?php echo $field . $text_color; ?>" id="<?php echo  $field . $text_color; ?>" data-default-color="#ffffff" value="<?php echo esc_attr( genesis_get_option( 'baconbar_text_color', $field ) ) ?>" />
+	</p>
+	<p class="color-pircker-row">
+		<span><?php _e( 'Choose the button color for your bacon bar:', 'baconbar' ); ?></span>
+		<input type="text" class="color-picker" name="<?php echo $field . $button_color; ?>" id="<?php echo  $field . $button_color; ?>" data-default-color="#D55454" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_color', $field ) ) ?>" />
+	</p>
+	<p class="color-pircker-row odd">
+		<span><?php _e( 'Choose the button hover color for your bacon bar:', 'baconbar' ); ?></span>
+		<input type="text" class="color-picker" name="<?php echo $field . $hover_color; ?>" id="<?php echo  $field . $hover_color; ?>" data-default-color="#DE5858" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_hover_color', $field ) ) ?>" />
+	</p>
+	<p class="color-pircker-row">
+		<span><?php _e( 'Choose the button text color for your bacon bar:', 'baconbar' ); ?></span>
+		<input type="text" class="color-picker" name="<?php echo $field . $btn_text_color; ?>" id="<?php echo  $field . $btn_text_color; ?>" data-default-color="#ffffff" value="<?php echo esc_attr( genesis_get_option( 'baconbar_button_text_color', $field ) ) ?>" />
+	</p>
+	<?php
 }
 
 
@@ -317,8 +318,6 @@ function baconbar_settings_layout_columns( $columns, $screen ) {
 ------------------------------------------------------------ */
 
 /**
- * baconbar_options_page function.
- *
  * This function displays the content for the Bacon Bar Settings settings page, builds the forms and outputs the metaboxes.
  *
  * @global $_baconbar_settings_hook
@@ -328,7 +327,6 @@ function baconbar_settings_layout_columns( $columns, $screen ) {
  *
  */
 function baconbar_options_page() {
-
 	global $_baconbar_settings_hook;
 	$hide2 = $hide3 = " display: none;";
 	?>
@@ -354,15 +352,4 @@ function baconbar_options_page() {
 
 		</form>
 	</div>
-	<script type="text/javascript">
-		//<![CDATA[
-		jQuery(document).ready( function($) {
-			// close postboxes that should be closed
-			$('.if-js-closed').removeClass('if-js-closed').addClass('closed');
-			// postboxes setup
-			postboxes.add_postbox_toggles('<?php echo $_baconbar_settings_hook; ?>');
-		});
-		//]]>
-	</script>
-
 <?php }
