@@ -49,7 +49,7 @@ function baconbar_get_style_data() {
 }
 
 /** Load CSS in <head> */
-//add_action( 'wp_head', 'baconbar_meh_css' );
+add_action( 'wp_head', 'baconbar_meh_css' );
 /**
  * Custom CSS.
  *
@@ -59,34 +59,23 @@ function baconbar_meh_css() {
 
 	$styles = baconbar_get_style_data();
 
-	$font_size = round( (int) $instance['size'] / 2 );
-	$icon_padding = round ( (int) $font_size / 2 );
+	//$font_size = round( (int) $instance['size'] / 2 );
+	//$icon_padding = round ( (int) $font_size / 2 );
 
 	/** The CSS to output */
 	$css = '
-	.awesome-feature .ico-bg a {
-		background: ' . $styles['background_color'] . ' !important;
-		-moz-border-radius: ' . $styles['border_radius'] . 'px
-		-webkit-border-radius: ' . $styles['border_radius'] . 'px;
-		border-radius: ' . $styles['border_radius'] . 'px;
-		color: ' . $styles['icon_color'] . ' !important;
-		font-size: ' . $styles . 'px;
-		padding: ' . $styles . 'px;
+	.bacon-bar {
+		background: ' . $styles['bg_color'] . ';
 	}
-
-	.awesome-feature .ico-bg i {
-		color: rgba(6, 6, 6, 0.14);
-		display: block;
-		font-size: 80px;
-		padding: 25% 0;
-		cursor: pointer;
-		position: relative;
-		text-align: center;
+	.bacon-bar .bacon-text {
+		color: ' . $styles['text_color'] . ';
 	}
-
-	.awesome-feature .ico-bg a:hover {
-		background-color: ' . $instance['background_color_hover'] . ' !important;
-		color: ' . $instance['icon_color_hover'] . ' !important;
+	.bacon-bar .bacon-button {
+		background: ' . $styles['button_color'] . ';
+		color: ' . $styles['button_text_color'] . ';
+	}
+	.bacon-bar .bacon-button:hover {
+		background: ' . $styles['button_hover_color'] . ';
 	}';
 
 	/** Minify a bit */

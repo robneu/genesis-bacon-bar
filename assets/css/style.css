@@ -22,7 +22,7 @@ body.bacon-bar-active.sticky-foot {
 	padding: 0;
 	text-align: center !important;
 	z-index: 99998;
-	box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3) inset, 0 1px 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.13) inset, 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .bacon-bar .wrap {
