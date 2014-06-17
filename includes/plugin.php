@@ -24,10 +24,8 @@ class Genesis_Bacon_Bar {
 	 * Load the plugin.
 	 */
 	public function load() {
-
 		self::define_constants();
 		self::includes();
-
 	}
 
 	/**
@@ -58,14 +56,20 @@ class Genesis_Bacon_Bar {
 		if ( ! defined( 'BACON_SETTINGS_FIELD' ) ) {
 			define( 'BACON_SETTINGS_FIELD', 'bacon-settings' );
 		}
-
 	}
 
 	/**
 	 * Include functions and libraries.
 	 */
 	public function includes() {
+		// instantiate the template loader class.
+		global $baconbar_template_loader;
 
+		if ( ! class_exists( 'Gamajo_Template_Loader' ) ) {
+			require_once BACON_BAR_DIR . '/includes/vendor/class-gamajo-template-loader.php';
+		}
+		require_once BACON_BAR_DIR . '/includes/class-baconbar-template-loader.php';
+		$baconbar_template_loader = new Bacon_Bar_Template_Loader;
 		// Load includes.
 		require_once( BACON_BAR_DIR . 'includes/functions.php' );
 		require_once( BACON_BAR_DIR . 'includes/scripts.php' );
