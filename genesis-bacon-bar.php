@@ -43,8 +43,8 @@ unset( $_dir );
 
 // Handy function for grabbing the plugin instance
 function genesis_bacon_bar() {
-	return Genesis_Bacon_Bar::$instance;
+	return new Genesis_Bacon_Bar;
 }
 
 // Initialize the plugin
-new Genesis_Bacon_Bar( __FILE__ );
+genesis_bacon_bar();
