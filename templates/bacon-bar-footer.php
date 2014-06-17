@@ -10,9 +10,9 @@
  */
 
 // Get the Bacon bar's class settings.
-$classes  = baconbar_get_bar_class( 'footer' );
+$class  = baconbar_get_bar_class( 'footer' );
 // Display the bacon bar.
-echo '<div class="bacon-bar ' . $classes . '">';
+echo '<div class="bacon-bar ' . $class . '">';
 	echo '<div class="wrap">';
 		do_action( 'baconbar_footer_content' );
 	echo '</div>';
