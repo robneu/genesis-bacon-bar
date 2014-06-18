@@ -32,14 +32,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 defined( 'WPINC' ) or die;
 
 // Grab this directory
-$_dir = dirname( __FILE__ ) . '/';
+$_baconbar_dir = dirname( __FILE__ ) . '/';
 
 // Include our core plugin files.
-include( $_dir . 'includes/install.php' );
-include( $_dir . 'includes/plugin.php' );
+include( $_baconbar_dir . 'includes/install.php' );
+include( $_baconbar_dir . 'includes/plugin.php' );
 
 // Clean up
-unset( $_dir );
+unset( $_baconbar_dir );
 
 // Handy function for grabbing the plugin instance
 function genesis_bacon_bar() {
