@@ -16,7 +16,7 @@ defined( 'WPINC' ) or die;
  * Removes the default Genesis child theme CSS
  * and then registers and loads CSS files.
  *
- * @since 2.0.0
+ * @since 1.0.0
  */
 add_action( 'wp_enqueue_scripts', 'baconbar_enqueue_styles' );
 function baconbar_enqueue_styles() {
@@ -31,7 +31,7 @@ function baconbar_enqueue_styles() {
 /**
  * Registers and loads JavaScript files.
  *
- * @since 2.0.0
+ * @since 1.0.0
  */
 function wpbacon_enqueue_scripts() {
 	wp_enqueue_script( 'wpbacon-general', wpbacon_get_js_uri() . 'general.js', array( 'jquery' ), '1.0.0', true );
@@ -56,33 +56,52 @@ add_action( 'wp_head', 'baconbar_meh_css' );
  * Output custom CSS to control the look of the icons.
  */
 function baconbar_meh_css() {
-
 	$styles = baconbar_get_style_data();
 
-	//$font_size = round( (int) $instance['size'] / 2 );
-	//$icon_padding = round ( (int) $font_size / 2 );
+	if ( ! baconbar_has_data( $styles ) ) {
+		return;
+	}
+	$css = '';
+	ob_start();
+	if ( $styles['bg_color'] ) {
+		?>
+		.bacon-bar {
+			background: <?php echo $styles['bg_color'] ?>;
+		}
+		<?php
+	}
 
-	/** The CSS to output */
-	$css = '
-	.bacon-bar {
-		background: ' . $styles['bg_color'] . ';
+	if ( $styles['text_color'] ) {
+		?>
+		.bacon-bar .bacon-text {
+			color: <?php echo $styles['text_color'] ?>;
+		}
+		<?php
 	}
-	.bacon-bar .bacon-text {
-		color: ' . $styles['text_color'] . ';
-	}
-	.bacon-bar .bacon-button {
-		background: ' . $styles['button_color'] . ';
-		color: ' . $styles['button_text_color'] . ';
-	}
-	.bacon-bar .bacon-button:hover {
-		background: ' . $styles['button_hover_color'] . ';
-	}';
 
-	/** Minify a bit */
+	if ( $styles['button_color'] || $styles['button_text_color'] ) {
+		?>
+		.bacon-bar .bacon-button {
+			background: <?php echo $styles['button_color'] ?>;
+			color: <?php echo $styles['button_text_color'] ?>;
+		}
+		<?php
+	}
+
+	if ( $styles['button_color'] ) {
+		?>
+		.bacon-bar .bacon-button:hover {
+			background: <?php echo $styles['button_hover_color'] ?>;
+		}
+		<?php
+	}
+
+	$css = ob_get_clean();
+
+	//* Minify the CSS a bit.
 	$css = str_replace( "\t", '', $css );
 	$css = str_replace( array( "\n", "\r" ), ' ', $css );
 
-	/** Echo the CSS */
+	//* Echo the CSS.
 	echo '<style type="text/css" media="screen">' . $css . '</style>';
-
 }
