@@ -66,12 +66,27 @@ function baconbar_get_data() {
 	return $settings;
 }
 
+/**
+ * Helper function to grab some placeholder text when no text has been entered.
+ *
+ * @return $settings the returned option values in an array.
+ * @since  1.0.3
+ */
+function baconbar_get_dummy_data() {
+	$settings = array(
+		'teaser_text'  => __( 'Want More Traffic? Supercharge Your Site With a WordPress SEO Audit!', 'baconbar' ),
+		'button_text'  => __( 'Audit WP', 'baconbar' ),
+		'button_url'   => 'http://auditwp.com',
+		'target_blank' => 1,
+	);
+	return $settings;
+}
+
 // Check an array to see if it has any data.
 function baconbar_has_data( $array ) {
 	if ( ! is_array( $array ) || empty( $array ) ) {
 		return false;
 	}
-
 	if ( count( array_filter( $array ) ) !== 0 ) {
 		return true;
 	}
@@ -102,10 +117,6 @@ add_action( 'genesis_meta', 'baconbar_setup' );
  * @since  1.0.1
  */
 function baconbar_setup() {
-	// Do nothing if the user hasn't entered any information to display.
-	if ( ! baconbar_has_content() ) {
-		return;
-	}
 	$settings = baconbar_get_data();
 	// Add the custom body classes for the bacon bar.
 	add_filter( 'body_class', 'baconbar_body_class' );
@@ -190,6 +201,10 @@ add_action( 'baconbar_footer_content', 'baconbar_do_content' );
  */
 function baconbar_do_content() {
 	$settings = baconbar_get_data();
+	// Do nothing if the user hasn't entered any information to display.
+	if ( ! baconbar_has_content() ) {
+		$settings = baconbar_get_dummy_data();
+	}
 	$target_blank = ! empty( $settings['target_blank'] ) ? 'target="_blank"' : '';
 
 	if ( $settings['teaser_text'] ) {

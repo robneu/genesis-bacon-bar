@@ -6,7 +6,7 @@
  * @subpackage  Genesis
  * @copyright   Copyright (c) 2013, FAT Media, LLC
  * @license     GPL-2.0+
- * @since       2.0.0
+ * @since       1.0.1
  */
 
 // Get the Bacon bar's class settings.

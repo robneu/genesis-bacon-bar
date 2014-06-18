@@ -2,11 +2,10 @@
 /**
  * Display output functions.
  *
- * @package           Rich_Recipes
- * @author            Robet Neu
- * @license           GPL-2.0+
- * @link              http://wpbacon.com
- * @copyright         2014 Robert Neu
+ * @package      Genesis Bacon Bar
+ * @author       Robert Neu <http://wpbacon.com/>
+ * @copyright    Copyright (c) 2014, FAT Media, LLC
+ * @license      GPL-2.0+
  *
  */
 

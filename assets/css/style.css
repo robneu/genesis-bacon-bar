@@ -1,6 +1,5 @@
-/*
-	Plugin Styles for the Genesis Bacon Bar
-*/
+/* # Plugin Styles for the Genesis Bacon Bar
+----------------------------------------------------------------------------- */
 
 .bacon-bar,
 .bacon-bar * {
@@ -96,16 +95,19 @@ body.bacon-bar-small.sticky-bottom {
 
 .bacon-bar.large .wrap {
 	height: 60px;
+	padding-bottom: 20px;
 	padding-top: 20px;
 }
 
 .bacon-bar.medium .wrap {
 	height: 40px;
+	padding-bottom: 10px;
 	padding-top: 10px;
 }
 
 .bacon-bar.small .wrap {
 	height: 25px;
+	padding-bottom: 5px;
 	padding-top: 5px;
 }
 
@@ -173,4 +175,59 @@ body.bacon-bar-small.sticky-bottom {
 
 .bacon-bar .bacon-button:hover {
     background: #DE5858;
+}
+
+
+/* # Media Queries
+----------------------------------------------------------------------------- */
+
+@media only screen and (max-width: 800px) {
+
+	body.bacon-bar-large.sticky-top,
+	body.bacon-bar-medium.sticky-top,
+	body.bacon-bar-small.sticky-top {
+		padding-top: 0 !important;
+	}
+
+	body.bacon-bar-large.sticky-bottom,
+	body.bacon-bar-medium.sticky-bottom,
+	body.bacon-bar-small.sticky-bottom {
+		padding-bottom: 0 !important;
+	}
+
+	.bacon-bar .wrap {
+		width: 100%;
+		padding: 0 5%;
+	}
+
+	.bacon-bar.large,
+	.bacon-bar.medium,
+	.bacon-bar.medium,
+	.bacon-bar.large .wrap,
+	.bacon-bar.medium .wrap,
+	.bacon-bar.medium .wrap {
+		height: auto;
+	}
+
+	.bacon-bar.fixed-bar,
+	.bacon-bar.fixed-footer {
+		position: relative;
+	}
+
+	.bacon-bar .bacon-button {
+	    display: block;
+	}
+
+	.bacon-bar.large .bacon-button {
+		margin: 20px 0 0;
+	}
+
+	.bacon-bar.medium .bacon-button {
+		margin: 10px 0 0;
+	}
+
+	.bacon-bar.small .bacon-button{
+		margin: 5px 0 0;
+	}
+
 }
