@@ -25,7 +25,7 @@ body.bacon-bar-large.sticky-top {
 	margin-top: 0 !important;
 }
 
-body.bacon-bar-large.sticky-foot {
+body.bacon-bar-large.sticky-bottom {
 	padding-bottom: 80px !important;
 	margin-top: 0 !important;
 }
@@ -35,7 +35,7 @@ body.bacon-bar-medium.sticky-top {
 	margin-top: 0 !important;
 }
 
-body.bacon-bar-medium.sticky-foot {
+body.bacon-bar-medium.sticky-bottom {
 	padding-bottom: 50px !important;
 	margin-top: 0 !important;
 }
@@ -45,7 +45,7 @@ body.bacon-bar-small.sticky-top {
 	margin-top: 0 !important;
 }
 
-body.bacon-bar-small.sticky-foot {
+body.bacon-bar-small.sticky-bottom {
 	padding-bottom: 30px !important;
 	margin-top: 0 !important;
 }
