@@ -12,19 +12,29 @@
 // Exit if accessed directly
 defined( 'WPINC' ) or die;
 
-function plugin_add_settings_link( $links ) {
+add_filter( 'plugin_action_links_' .  plugin_basename( BACON_BAR_FILE ), 'baconbar_add_settings_link' );
+/**
+ * Add a link to the WordPress customizer to the plugin action links.
+ *
+ * @param  array $links default plugin action links
+ * @return array $links modified plugin action links
+ * @uses   wp_customize_url()
+ * @since  1.0.2
+ */
+function baconbar_add_settings_link( $links ) {
 	$customizer_link = wp_customize_url( get_stylesheet() );
     $settings_link = '<a href="' . $customizer_link . '">' . __( 'Customize', 'baconbar' ) . '</a>';
   	array_push( $links, $settings_link );
   	return $links;
 }
-add_filter( 'plugin_action_links_' .  plugin_basename( BACON_BAR_FILE ), 'plugin_add_settings_link' );
+
 
 add_action( 'genesis_theme_settings_metaboxes', 'baconbar_register_settings_box' );
 /**
  * Register Metabox for the Genesis Bacon Bar.
  *
  * @param string $_genesis_theme_settings_pagehook
+ * @uses  add_meta_box()
  * @since 1.0.2
  */
 function baconbar_register_settings_box( $_genesis_theme_settings_pagehook ) {
@@ -41,6 +51,7 @@ function baconbar_register_settings_box( $_genesis_theme_settings_pagehook ) {
 /**
  * Create Metabox which links to and explains the WordPress customizer.
  *
+ * @uses  wp_customize_url()
  * @since 1.0.2
  */
 function baconbar_settings_box() {
