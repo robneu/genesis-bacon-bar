@@ -13,7 +13,7 @@
 defined( 'WPINC' ) or die;
 
 // Grab the plugin file.
-$_plugin_file = $_dir . 'genesis-bacon-bar.php';
+$_baconbar_plugin_file = $_baconbar_dir . 'genesis-bacon-bar.php';
 
 /**
  * Install
@@ -23,7 +23,7 @@ $_plugin_file = $_dir . 'genesis-bacon-bar.php';
  * @since 1.0
  * @return void
  */
-function baconbar_install( $_plugin_file ) {
+function baconbar_install( $_baconbar_plugin_file ) {
 
 	$theme_info = wp_get_theme();
 
@@ -33,11 +33,11 @@ function baconbar_install( $_plugin_file ) {
 	);
 
 	if ( ! in_array( $theme_info->Template, $genesis_flavors ) ) {
-		deactivate_plugins( $_plugin_file ); // Deactivate ourself
+		deactivate_plugins( $_baconbar_plugin_file ); // Deactivate ourself
 		wp_die('Sorry, you can\'t activate unless you have installed <a href="http://www.studiopress.com/themes/genesis">Genesis</a>');
 	}
 }
-register_activation_hook( $_plugin_file, 'baconbar_install' );
+register_activation_hook( $_baconbar_plugin_file, 'baconbar_install' );
 
 // Clean up
-unset( $_plugin_file );
+unset( $_baconbar_plugin_file );
