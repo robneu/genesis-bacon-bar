@@ -35,7 +35,7 @@ class Genesis_Bacon_Bar {
 	 */
 	public function define_constants() {
 		// Plugin version.
-		define( 'BACON_BAR_VERSION', '1.0.2' );
+		define( 'BACON_BAR_VERSION', '1.0.3' );
 		// Plugin root file.
 		if ( ! defined( 'BACON_BAR_FILE' ) ) {
 			define( 'BACON_BAR_FILE', dirname( dirname( __FILE__ ) ) . '/genesis-bacon-bar.php' );
