@@ -14,7 +14,7 @@ One of the most important things you need to do with on your website is call the
 * Easily add a call-to-action bar to your website without writing any code.
 * Responsive design which adapts well to mobile devices.
 * Customize the look and feel in real time using the WordPress customizer.
-* Override bacon bar templates in a theme or child theme.
+* Override bacon bar templates in a child theme.
 * Developer-friendly code which allows for simple style and display overrides.
 
 ## Settings
@@ -29,7 +29,7 @@ _The bacon bar style editor._
 
 ## Template Hierarchy
 
-Templates can be defined in a theme or child theme to override the plugin's template. Templates must be placed inside a /genesis-bacon-bar/ directory within the theme. You can override the default templates using the following template names:
+Templates can be defined in a child theme to override the plugin's template. Templates must be placed inside a /genesis-bacon-bar/ directory within the theme. You can override the default templates using the following template names:
 
 * bacon-bar.php
 * bacon-bar-footer.php
