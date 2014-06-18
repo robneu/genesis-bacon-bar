@@ -209,6 +209,10 @@ body.bacon-bar-small.sticky-bottom {
 		height: auto;
 	}
 
+	.admin-bar .fixed-bar {
+		top: 0;
+	}
+
 	.bacon-bar.fixed-bar,
 	.bacon-bar.fixed-footer {
 		position: relative;
