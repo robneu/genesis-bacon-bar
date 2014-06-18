@@ -5,7 +5,7 @@
  * @package      Genesis Bacon Bar
  * @author       Robert Neu <http://wpbacon.com/>
  * @copyright    Copyright (c) 2014, FAT Media, LLC
- * @license      GPL2+
+ * @license      GPL-2.0+
  *
  */
 
@@ -34,7 +34,7 @@ class Genesis_Bacon_Bar {
 	 */
 	public function define_constants() {
 		// Plugin version.
-		define( 'BACON_BAR_VERSION', '1.0.1' );
+		define( 'BACON_BAR_VERSION', '1.0.2' );
 		// Plugin root file.
 		if ( ! defined( 'BACON_BAR_FILE' ) ) {
 			define( 'BACON_BAR_FILE', dirname( dirname( __FILE__ ) ) . '/genesis-bacon-bar.php' );
