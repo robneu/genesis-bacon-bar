@@ -26,6 +26,7 @@ class Genesis_Bacon_Bar {
 	public function load() {
 		self::define_constants();
 		self::includes();
+		// Hook the customizer into genesis_setup to make sure Genesis_Customizer_Base isn't redeclared.
 		add_action( 'genesis_setup', array( $this, 'include_customizer' ) );
 	}
 
@@ -55,9 +56,9 @@ class Genesis_Bacon_Bar {
 	public function includes() {
 		// Load Gary Jones' Template Loader Class.
 		if ( ! class_exists( 'Gamajo_Template_Loader' ) ) {
-			require_once( BACON_BAR_DIR . '/includes/vendor/class-gamajo-template-loader.php' );
+			require_once( BACON_BAR_DIR . 'includes/vendor/class-gamajo-template-loader.php' );
 		}
-		require_once( BACON_BAR_DIR . '/includes/class-baconbar-template-loader.php' );
+		require_once( BACON_BAR_DIR . 'includes/class-baconbar-template-loader.php' );
 		require_once( BACON_BAR_DIR . 'includes/functions.php' );
 		require_once( BACON_BAR_DIR . 'includes/scripts.php' );
 		// Load the admin.
@@ -65,8 +66,9 @@ class Genesis_Bacon_Bar {
 			require_once( BACON_BAR_DIR . 'includes/admin/settings.php' );
 		}
 	}
+
 	/**
-	 * Include functions and libraries.
+	 * Include the Bacon Bar customizer class.
 	 */
 	public function include_customizer() {
 		require_once( BACON_BAR_DIR . 'includes/admin/customizer.php' );
