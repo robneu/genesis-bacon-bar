@@ -33,15 +33,34 @@ function baconbar_get_template_part( $slug, $name = null, $load = true ) {
 }
 
 /**
+ * Check whether we are currently viewing the site via the WordPress Customizer.
+ *
+ * @since 1.0.4
+ *
+ * @global $wp_customize Customizer.
+ *
+ * @return boolean Return true if viewing page via Customizer, false otherwise.
+ */
+function baconbar_is_customizer() {
+	global $wp_customize;
+	return is_a( $wp_customize, 'WP_Customize_Manager' ) && $wp_customize->is_preview();
+}
+
+/**
  * Helper function to make getting the bacon bar options less verbose.
  *
  * @param  $option the option value to check.
  * @return $output the returned option value.
  * @uses   genesis_get_option()
+ * @uses   baconbar_is_customizer()
  * @since  1.0.1
  */
 function baconbar_get_option( $option ) {
-	$output = genesis_get_option( $option, 'bacon-settings' );
+	$use_cache = true;
+	if ( baconbar_is_customizer() ) {
+		$use_cache = false;
+	}
+	$output = genesis_get_option( $option, 'bacon-settings', $use_cache );
 	return $output;
 }
 

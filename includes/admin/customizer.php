@@ -11,6 +11,9 @@
  * @link    http://my.studiopress.com/themes/genesis/
  */
 
+// Exit if accessed directly
+defined( 'WPINC' ) or die;
+
 if ( ! class_exists( 'Genesis_Customizer_Base' ) ) :
 /**
  *
