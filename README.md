@@ -3,8 +3,8 @@
 A free Hello Bar alternative for a any Genesis website.
 
 __Contributors:__ [Robert Neu](https://github.com/wpbacon)
-__Requires:__ Genesis 2.0, WordPress 3.9
-__Tested up to:__ Genesis 2.1, WordPress 3.9
+__Requires:__ Genesis 2.0
+__Tested up to:__ Genesis 2.1
 __License:__ [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.html)
 
 One of the most important things you need to do with on your website is call the attention of your visitors to something. The Genesis Bacon Bar makes this extremely easy by giving you the ability to add a fully-customizable, site-wide call-to-action bar. You can add your own text, choose your own colors, and even choose how and where you'd like your bacon bar to display!
