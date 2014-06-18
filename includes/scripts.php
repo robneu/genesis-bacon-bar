@@ -13,30 +13,11 @@
 defined( 'WPINC' ) or die;
 
 /**
- * Removes the default Genesis child theme CSS
- * and then registers and loads CSS files.
+ * Helper function to grab the bacon bar style options.
  *
- * @since 1.0.0
+ * @return $styles an array of options with style information.
+ * @since  1.0.1
  */
-add_action( 'wp_enqueue_scripts', 'baconbar_enqueue_styles' );
-function baconbar_enqueue_styles() {
-	// Get the theme info.
-	$css_uri = BACON_BAR_URL . 'assets/css/';
-
-	// Register the styles.
-	wp_enqueue_style( 'bacon-bar', $css_uri . '/style.css', array(), BACON_BAR_VERSION );
-}
-
-//add_action( 'wp_enqueue_scripts', 'wpbacon_enqueue_scripts' );
-/**
- * Registers and loads JavaScript files.
- *
- * @since 1.0.0
- */
-function wpbacon_enqueue_scripts() {
-	wp_enqueue_script( 'wpbacon-general', wpbacon_get_js_uri() . 'general.js', array( 'jquery' ), '1.0.0', true );
-}
-
 function baconbar_get_style_data() {
 	$styles = array(
 		'bg_color'           => baconbar_get_option( 'baconbar_bg_color' ),
@@ -48,12 +29,38 @@ function baconbar_get_style_data() {
 	return $styles;
 }
 
-/** Load CSS in <head> */
+add_action( 'wp_enqueue_scripts', 'baconbar_enqueue_styles' );
+/**
+ * Registers and loads required CSS files.
+ *
+ * @since 1.0.0
+ */
+function baconbar_enqueue_styles() {
+	// Get the bacon bar css uri.
+	$css_uri = BACON_BAR_URL . 'assets/css/';
+
+	// Register the styles.
+	wp_enqueue_style( 'bacon-bar', $css_uri . '/style.css', array(), BACON_BAR_VERSION );
+}
+
+//add_action( 'wp_enqueue_scripts', 'baconbar_enqueue_scripts' );
+/**
+ * Registers and loads required JavaScript files.
+ *
+ * @since 1.0.0
+ */
+function baconbar_enqueue_scripts() {
+	// Get the bacon bar js uri.
+	$js_uri = BACON_BAR_URL . 'assets/js/';
+	wp_enqueue_script( 'wpbacon-general', $js_uri . 'general.js', array( 'jquery' ), '1.0.0', true );
+}
+
 add_action( 'wp_head', 'baconbar_meh_css' );
 /**
- * Custom CSS.
+ * Output custom CSS to control the look of the bacon bar in the <head>.
  *
- * Output custom CSS to control the look of the icons.
+ * @return null if we have no custom styles.
+ * @since  1.0.1
  */
 function baconbar_meh_css() {
 	$styles = baconbar_get_style_data();
