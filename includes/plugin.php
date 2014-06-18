@@ -26,6 +26,7 @@ class Genesis_Bacon_Bar {
 	public function load() {
 		self::define_constants();
 		self::includes();
+		add_action( 'genesis_setup', array( $this, 'include_customizer' ) );
 	}
 
 	/**
@@ -46,10 +47,6 @@ class Genesis_Bacon_Bar {
 		if ( ! defined( 'BACON_BAR_DIR' ) ) {
 			define( 'BACON_BAR_DIR', plugin_dir_path( BACON_BAR_FILE ) );
 		}
-		// Bacon settings fields.
-		if ( ! defined( 'BACON_SETTINGS_FIELD' ) ) {
-			define( 'BACON_SETTINGS_FIELD', 'bacon-settings' );
-		}
 	}
 
 	/**
@@ -67,5 +64,11 @@ class Genesis_Bacon_Bar {
 		if ( is_admin() ) {
 			require_once( BACON_BAR_DIR . 'includes/admin/settings.php' );
 		}
+	}
+	/**
+	 * Include functions and libraries.
+	 */
+	public function include_customizer() {
+		require_once( BACON_BAR_DIR . 'includes/admin/customizer.php' );
 	}
 }
