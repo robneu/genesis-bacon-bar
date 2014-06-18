@@ -41,7 +41,7 @@ function baconbar_get_template_part( $slug, $name = null, $load = true ) {
  * @since  1.0.1
  */
 function baconbar_get_option( $option ) {
-	$output = genesis_get_option( $option, BACON_SETTINGS_FIELD );
+	$output = genesis_get_option( $option, 'bacon-settings' );
 	return $output;
 }
 
@@ -54,14 +54,28 @@ function baconbar_get_option( $option ) {
  */
 function baconbar_get_data() {
 	$settings = array(
-		'button_url'   => baconbar_get_option( 'baconbar_button_url' ),
-		'button_text'  => baconbar_get_option( 'baconbar_button_text' ),
-		'target_blank' => baconbar_get_option( 'baconbar_target_blank' ),
 		'teaser_text'  => baconbar_get_option( 'baconbar_teaser_text' ),
+		'button_text'  => baconbar_get_option( 'baconbar_button_text' ),
+		'button_url'   => baconbar_get_option( 'baconbar_button_url' ),
+		'target_blank' => baconbar_get_option( 'baconbar_target_blank' ),
 		'position'     => baconbar_get_option( 'baconbar_position' ),
 		'is_sticky'    => baconbar_get_option( 'baconbar_sticky' ),
+		'size'         => baconbar_get_option( 'baconbar_size' ),
+		'has_border'   => baconbar_get_option( 'baconbar_has_border' ),
 	);
 	return $settings;
+}
+
+// Check an array to see if it has any data.
+function baconbar_has_data( $array ) {
+	if ( ! is_array( $array ) || empty( $array ) ) {
+		return false;
+	}
+
+	if ( count( array_filter( $array ) ) !== 0 ) {
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -71,7 +85,7 @@ function baconbar_get_data() {
  * @uses   baconbar_get_data()
  * @since  1.0.1
  */
-function baconbar_has_data() {
+function baconbar_has_content() {
 	$settings = baconbar_get_data();
 	if ( $settings['button_url'] || $settings['button_text'] || $settings['teaser_text'] ) {
 		return true;
@@ -89,7 +103,7 @@ add_action( 'genesis_meta', 'baconbar_setup' );
  */
 function baconbar_setup() {
 	// Do nothing if the user hasn't entered any information to display.
-	if ( ! baconbar_has_data() ) {
+	if ( ! baconbar_has_content() ) {
 		return;
 	}
 	$settings = baconbar_get_data();
@@ -115,7 +129,9 @@ function baconbar_setup() {
  */
 function baconbar_body_class( $classes ) {
 	$settings = baconbar_get_data();
-	$classes[] = 'bacon-bar-active';
+	if ( $settings['size'] ) {
+		$classes[] .= 'bacon-bar-' . esc_attr( $settings['size'] );
+	}
 	if ( $settings['is_sticky'] && 'above' === $settings['position'] ) {
 		$classes[] = 'sticky-top';
 	}
@@ -140,6 +156,12 @@ function baconbar_get_bar_class( $position ) {
 	if ( $settings['is_sticky'] ) {
 		$classes .= ' fixed-bar';
 	}
+	if ( $settings['has_border'] ) {
+		$classes .= ' border-bottom';
+	}
+	if ( $settings['size'] ) {
+		$classes .= ' ' . esc_attr( $settings['size'] );
+	}
 	// End here if we're not displaying a footer bar.
 	if ( 'footer' !== $position ) {
 		return $classes;
@@ -148,6 +170,12 @@ function baconbar_get_bar_class( $position ) {
 	// Add the sticky class for a fixed-position bar.
 	if ( $settings['is_sticky'] ) {
 		$classes .= ' fixed-footer';
+	}
+	if ( $settings['has_border'] ) {
+		$classes .= ' border-bottom';
+	}
+	if ( $settings['size'] ) {
+		$classes .= ' ' . esc_attr( $settings['size'] );
 	}
 	return $classes;
 }
