@@ -1,12 +1,12 @@
 <?php
 /**
- * Load Theme JavaScript and CSS
+ * Load JavaScript and CSS
  *
  * @package     Genesis Bacon Bar
  * @subpackage  Genesis
  * @copyright   Copyright (c) 2013, FAT Media, LLC
  * @license     GPL-2.0+
- * @since       2.0.0
+ * @since       1.0.0
  */
 
 // Exit if accessed directly
