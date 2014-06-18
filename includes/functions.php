@@ -157,7 +157,7 @@ function baconbar_get_bar_class( $position ) {
 		$classes .= ' fixed-bar';
 	}
 	if ( $settings['has_border'] ) {
-		$classes .= ' border-bottom';
+		$classes .= ' has-border';
 	}
 	if ( $settings['size'] ) {
 		$classes .= ' ' . esc_attr( $settings['size'] );
@@ -172,7 +172,7 @@ function baconbar_get_bar_class( $position ) {
 		$classes .= ' fixed-footer';
 	}
 	if ( $settings['has_border'] ) {
-		$classes .= ' border-bottom';
+		$classes .= ' has-border';
 	}
 	if ( $settings['size'] ) {
 		$classes .= ' ' . esc_attr( $settings['size'] );

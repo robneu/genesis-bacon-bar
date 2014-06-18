@@ -59,7 +59,6 @@ body.bacon-bar-small.sticky-bottom {
 	position: relative;
 	text-align: center !important;
 	z-index: 99998;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .bacon-bar.large {
@@ -74,8 +73,20 @@ body.bacon-bar-small.sticky-bottom {
 	height: 30px;
 }
 
-.bacon-bar.border-bottom {
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) 0 -1px 0 rgba(0, 0, 0, 0.3) inset;
+.bacon-bar.header-bar {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.bacon-bar.header-bar.has-border {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.bacon-bar.footer-bar {
+	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.bacon-bar.footer-bar.has-border {
+	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2) inset;
 }
 
 .bacon-bar .wrap {
