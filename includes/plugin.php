@@ -26,8 +26,6 @@ class Genesis_Bacon_Bar {
 	public function load() {
 		self::define_constants();
 		self::includes();
-		// Hook the customizer into genesis_setup to make sure Genesis_Customizer_Base isn't redeclared.
-		add_action( 'genesis_setup', array( $this, 'include_customizer' ) );
 	}
 
 	/**
@@ -35,7 +33,7 @@ class Genesis_Bacon_Bar {
 	 */
 	public function define_constants() {
 		// Plugin version.
-		define( 'BACON_BAR_VERSION', '1.0.3' );
+		define( 'BACON_BAR_VERSION', '1.0.4' );
 		// Plugin root file.
 		if ( ! defined( 'BACON_BAR_FILE' ) ) {
 			define( 'BACON_BAR_FILE', dirname( dirname( __FILE__ ) ) . '/genesis-bacon-bar.php' );
@@ -61,16 +59,20 @@ class Genesis_Bacon_Bar {
 		require_once( BACON_BAR_DIR . 'includes/class-baconbar-template-loader.php' );
 		require_once( BACON_BAR_DIR . 'includes/functions.php' );
 		require_once( BACON_BAR_DIR . 'includes/scripts.php' );
-		// Load the admin.
 		if ( is_admin() ) {
-			require_once( BACON_BAR_DIR . 'includes/admin/settings.php' );
+			require_once( BACON_BAR_DIR . 'includes/admin/functions.php' );
 		}
+		// Include some files after Genesis to avoid conflicts.
+		add_action( 'genesis_setup', array( $this, 'include_after_genesis' ) );
 	}
 
 	/**
 	 * Include the Bacon Bar customizer class.
 	 */
-	public function include_customizer() {
+	public function include_after_genesis() {
 		require_once( BACON_BAR_DIR . 'includes/admin/customizer.php' );
+		if ( is_admin() ) {
+			require_once( BACON_BAR_DIR . 'includes/admin/class-settings.php' );
+		}
 	}
 }

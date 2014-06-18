@@ -33,15 +33,34 @@ function baconbar_get_template_part( $slug, $name = null, $load = true ) {
 }
 
 /**
+ * Check whether we are currently viewing the site via the WordPress Customizer.
+ *
+ * @since 1.0.4
+ *
+ * @global $wp_customize Customizer.
+ *
+ * @return boolean Return true if viewing page via Customizer, false otherwise.
+ */
+function baconbar_is_customizer() {
+	global $wp_customize;
+	return is_a( $wp_customize, 'WP_Customize_Manager' ) && $wp_customize->is_preview();
+}
+
+/**
  * Helper function to make getting the bacon bar options less verbose.
  *
  * @param  $option the option value to check.
  * @return $output the returned option value.
  * @uses   genesis_get_option()
+ * @uses   baconbar_is_customizer()
  * @since  1.0.1
  */
 function baconbar_get_option( $option ) {
-	$output = genesis_get_option( $option, 'bacon-settings' );
+	$use_cache = true;
+	if ( baconbar_is_customizer() ) {
+		$use_cache = false;
+	}
+	$output = genesis_get_option( $option, 'bacon-settings', $use_cache );
 	return $output;
 }
 
@@ -62,22 +81,6 @@ function baconbar_get_data() {
 		'is_sticky'    => baconbar_get_option( 'baconbar_sticky' ),
 		'size'         => baconbar_get_option( 'baconbar_size' ),
 		'has_border'   => baconbar_get_option( 'baconbar_has_border' ),
-	);
-	return $settings;
-}
-
-/**
- * Helper function to grab some placeholder text when no text has been entered.
- *
- * @return $settings the returned option values in an array.
- * @since  1.0.3
- */
-function baconbar_get_dummy_data() {
-	$settings = array(
-		'teaser_text'  => __( 'Want More Traffic? Supercharge Your Site With a WordPress SEO Audit!', 'baconbar' ),
-		'button_text'  => __( 'Audit WP', 'baconbar' ),
-		'button_url'   => 'http://auditwp.com',
-		'target_blank' => 1,
 	);
 	return $settings;
 }
@@ -200,11 +203,11 @@ add_action( 'baconbar_footer_content', 'baconbar_do_content' );
  * @since  1.0.1
  */
 function baconbar_do_content() {
-	$settings = baconbar_get_data();
 	// Do nothing if the user hasn't entered any information to display.
 	if ( ! baconbar_has_content() ) {
-		$settings = baconbar_get_dummy_data();
+		return;
 	}
+	$settings = baconbar_get_data();
 	$target_blank = ! empty( $settings['target_blank'] ) ? 'target="_blank"' : '';
 
 	if ( $settings['teaser_text'] ) {
