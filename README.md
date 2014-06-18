@@ -1,6 +1,6 @@
-genesis-bacon-bar
-=================
+Genesis Bacon Bar - The Hello Bar for Genesis
+=============================================
 
-A call-to-action bar for any Genesis website.
-
-Note: This is only partiaully working at the moment. It shouldn't break anything if you install it, but not all of  the options work yet and things are likely to change quite a bit.
+The Genesis bacon bar is a free Hello Bar alternative for a any Genesis website.
+Now you can easily add a call-to-action bar and customize the look-and-feel without
+writing any code.
