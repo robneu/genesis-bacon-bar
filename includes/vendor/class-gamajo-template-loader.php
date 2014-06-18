@@ -10,6 +10,9 @@
  * @version   1.1.0
  */
 
+// Exit if accessed directly
+defined( 'WPINC' ) or die;
+
 /**
  * Template loader.
  *

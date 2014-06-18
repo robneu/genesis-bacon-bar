@@ -1,6 +1,6 @@
 <?php
 /**
- * Display output functions.
+ * Template Loader Class.
  *
  * @package      Genesis Bacon Bar
  * @author       Robert Neu <http://wpbacon.com/>
@@ -10,13 +10,13 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+defined( 'WPINC' ) or die;
 
 /**
  * Template loader.
  *
- * @package Cue
- * @since 1.0.0
+ * @package Genesis Bacon Bar
+ * @since   1.0.0
  */
 class Bacon_Bar_Template_Loader extends Gamajo_Template_Loader {
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Genesis Bacon Bar admin Funcitons.
+ * Genesis Bacon Bar Admin Funcitons.
  *
  * @package      Genesis Bacon Bar
  * @author       Robert Neu <http://wpbacon.com/>
@@ -8,6 +8,9 @@
  * @license      GPL-2.0+
  *
  */
+
+// Exit if accessed directly
+defined( 'WPINC' ) or die;
 
 add_action( 'after_setup_theme', 'baconbar_add_admin_menus' );
 /**
