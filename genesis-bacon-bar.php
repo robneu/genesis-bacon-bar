@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Genesis Bacon Bar
-Description: Creates a fixed-position call-to-action bar on any Genesis site.
-Version: 1.0.0
+Description: Creates a responsive call-to-action bar on any Genesis site.
+Version: 1.0.2
 License: GPL version 2 or any later version
 Plugin URI: http://wpbacon.com/plugins/genesis-bacon-bar/
 Author: WP Bacon
@@ -43,8 +43,8 @@ unset( $_dir );
 
 // Handy function for grabbing the plugin instance
 function genesis_bacon_bar() {
-	return Genesis_Bacon_Bar::$instance;
+	return new Genesis_Bacon_Bar;
 }
 
 // Initialize the plugin
-new Genesis_Bacon_Bar( __FILE__ );
+genesis_bacon_bar();

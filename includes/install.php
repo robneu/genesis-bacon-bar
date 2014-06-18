@@ -5,7 +5,7 @@
  * @package      Genesis Bacon Bar
  * @author       Robert Neu <http://wpbacon.com/>
  * @copyright    Copyright (c) 2014, FAT Media, LLC
- * @license      GPL2+
+ * @license      GPL-2.0+
  *
  */
 

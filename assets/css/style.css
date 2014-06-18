@@ -1,0 +1,165 @@
+/*
+	Plugin Styles for the Genesis Bacon Bar
+*/
+
+.bacon-bar,
+.bacon-bar * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing:    border-box;
+	box-sizing:         border-box;
+}
+
+.bacon-bar:before {
+	content: " ";
+	display: table;
+}
+
+.bacon-bar:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+
+body.bacon-bar-large.sticky-top {
+	padding-top: 80px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-large.sticky-foot {
+	padding-bottom: 80px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-medium.sticky-top {
+	padding-top: 50px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-medium.sticky-foot {
+	padding-bottom: 50px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-small.sticky-top {
+	padding-top: 30px !important;
+	margin-top: 0 !important;
+}
+
+body.bacon-bar-small.sticky-foot {
+	padding-bottom: 30px !important;
+	margin-top: 0 !important;
+}
+
+.bacon-bar {
+	background: #312D2E;
+	font-size: 14px;
+	font-weight: normal !important;
+	line-height: 1;
+	padding: 0;
+	position: relative;
+	text-align: center !important;
+	z-index: 99998;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.bacon-bar.large {
+	height: 80px;
+}
+
+.bacon-bar.medium {
+	height: 50px;
+}
+
+.bacon-bar.small {
+	height: 30px;
+}
+
+.bacon-bar.border-bottom {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) 0 -1px 0 rgba(0, 0, 0, 0.3) inset;
+}
+
+.bacon-bar .wrap {
+	margin: 0 auto;
+	max-width: 1140px;
+}
+
+.bacon-bar.large .wrap {
+	height: 60px;
+	padding-top: 20px;
+}
+
+.bacon-bar.medium .wrap {
+	height: 40px;
+	padding-top: 10px;
+}
+
+.bacon-bar.small .wrap {
+	height: 25px;
+	padding-top: 5px;
+}
+
+.bacon-bar.fixed-bar {
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 99999;
+}
+
+.bacon-bar.fixed-footer {
+	bottom: 0;
+	left: 0;
+	margin-bottom: 0;
+	position: fixed;
+	right: 0;
+}
+
+.admin-bar .fixed-bar {
+	top: 32px;
+}
+
+.bacon-bar .bacon-text {
+	color: #F2F2F2;
+	display: inline-block;
+	font-size: 20px;
+	margin: 0;
+}
+
+.bacon-bar.medium .bacon-text {
+	font-size: 18px;
+}
+
+.bacon-bar.small .bacon-text {
+	font-size: 14px;
+}
+
+.bacon-bar .bacon-button {
+	background: #D55454;
+	border-radius: 2px;
+	color: #ffffff;
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1;
+	margin-left: 40px;
+	margin-top: 0;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none !important;
+}
+
+.bacon-bar.medium .bacon-button {
+    font-size: 13px;
+    padding: 8px 10px;
+}
+
+.bacon-bar.small .bacon-button {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.bacon-bar .bacon-button:hover {
+    background: #DE5858;
+}
