@@ -95,20 +95,17 @@ body.bacon-bar-small.sticky-bottom {
 
 .bacon-bar.large .wrap {
 	height: 60px;
-	padding-bottom: 20px;
-	padding-top: 20px;
+	padding: 20px 0;
 }
 
 .bacon-bar.medium .wrap {
 	height: 40px;
-	padding-bottom: 10px;
-	padding-top: 10px;
+	padding: 10px 0;
 }
 
 .bacon-bar.small .wrap {
 	height: 25px;
-	padding-bottom: 5px;
-	padding-top: 5px;
+	padding: 5px 0;
 }
 
 .bacon-bar.fixed-bar {
@@ -195,18 +192,28 @@ body.bacon-bar-small.sticky-bottom {
 		padding-bottom: 0 !important;
 	}
 
-	.bacon-bar .wrap {
-		width: 100%;
-		padding: 0 5%;
-	}
-
 	.bacon-bar.large,
 	.bacon-bar.medium,
-	.bacon-bar.medium,
+	.bacon-bar.small,
 	.bacon-bar.large .wrap,
 	.bacon-bar.medium .wrap,
-	.bacon-bar.medium .wrap {
+	.bacon-bar.small .wrap {
 		height: auto;
+	}
+
+	.bacon-bar.large .wrap,
+	.bacon-bar.medium .wrap,
+	.bacon-bar.small .wrap {
+		width: 100%;
+	}
+
+	.bacon-bar.large .wrap {
+		padding: 30px 5%;
+	}
+
+	.bacon-bar.medium .wrap,
+	.bacon-bar.small .wrap {
+		padding: 20px 5%;
 	}
 
 	.admin-bar .fixed-bar {
@@ -226,12 +233,9 @@ body.bacon-bar-small.sticky-bottom {
 		margin: 20px 0 0;
 	}
 
-	.bacon-bar.medium .bacon-button {
+	.bacon-bar.medium .bacon-button,
+	.bacon-bar.small .bacon-button {
 		margin: 10px 0 0;
-	}
-
-	.bacon-bar.small .bacon-button{
-		margin: 5px 0 0;
 	}
 
 }
